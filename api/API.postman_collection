@@ -1,0 +1,182 @@
+{
+	"info": {
+		"_postman_id": "6c731b6f-e5f6-494e-af75-39c8acdf2e70",
+		"name": "API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28502076"
+	},
+	"item": [
+		{
+			"name": "Store",
+			"item": [
+				{
+					"name": "Create Purchase",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"items\": [\"item1\", \"item2\", \"item3\"],\r\n  \"total\": 123.45,\r\n  \"user\": {\r\n    \"id\": 1,\r\n   \"email\": \"user@gmail.com\",\r\n   \"phone\": \"3056476572\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{BASE_URL_STORE}}/purchases?count=1",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{BASE_URL_STORE}}"
+							],
+							"path": [
+								"purchases"
+							],
+							"query": [
+								{
+									"key": "count",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Multiple Purchases",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"items\": [\"item1\", \"item2\", \"item3\"],\r\n  \"total\": 123.45,\r\n  \"user\": {\r\n    \"id\": 1,\r\n   \"email\": \"user@gmail.com\",\r\n   \"phone\": \"3056476572\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{BASE_URL_STORE}}/purchases?count=15",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{BASE_URL_STORE}}"
+							],
+							"path": [
+								"purchases"
+							],
+							"query": [
+								{
+									"key": "count",
+									"value": "15"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Purchases",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{BASE_URL_STORE}}/purchases",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{BASE_URL_STORE}}"
+							],
+							"path": [
+								"purchases"
+							],
+							"query": [
+								{
+									"key": "lastChecked",
+									"value": "2024-09-03T13:00:00Z",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get New Purchases",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{BASE_URL_STORE}}/purchases?lastChecked=2024-09-16T16:47:01.531Z",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{BASE_URL_STORE}}"
+							],
+							"path": [
+								"purchases"
+							],
+							"query": [
+								{
+									"key": "lastChecked",
+									"value": "2024-09-16T16:47:01.531Z"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Clear Purchases",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{BASE_URL_STORE}}/purchases",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{BASE_URL_STORE}}"
+							],
+							"path": [
+								"purchases"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "PROTOCOL",
+			"value": "http",
+			"type": "string"
+		},
+		{
+			"key": "BASE_URL_STORE",
+			"value": "localhost:3000",
+			"type": "string"
+		}
+	]
+}
