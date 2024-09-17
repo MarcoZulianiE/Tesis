@@ -10,7 +10,39 @@
 			"name": "Store",
 			"item": [
 				{
+					"name": "Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{BASE_URL_STORE}}/health",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{BASE_URL_STORE}}"
+							],
+							"path": [
+								"health"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Create Purchase",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(jsonData.id) {\r",
+									"    pm.collectionVariables.set('PURCHASE_ID', jsonData.id);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -143,6 +175,178 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Uber",
+			"item": [
+				{
+					"name": "Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{BASE_URL_UBER}}/health",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{BASE_URL_UBER}}"
+							],
+							"path": [
+								"health"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Trip",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"origin\": \"store\",\r\n  \"purchaseId\": {{PURCHASE_ID}},\r\n  \"user\": {\r\n    \"id\": 1,\r\n   \"email\": \"user@gmail.com\",\r\n   \"phone\": \"3056476572\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{BASE_URL_UBER}}/trips",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{BASE_URL_UBER}}"
+							],
+							"path": [
+								"trips"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Trips",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{BASE_URL_UBER}}/trips",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{BASE_URL_UBER}}"
+							],
+							"path": [
+								"trips"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Clear Trips",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{BASE_URL_UBER}}/trips",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{BASE_URL_UBER}}"
+							],
+							"path": [
+								"trips"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "WhatsApp",
+			"item": [
+				{
+					"name": "Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{BASE_URL_WHATSAPP}}/health",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{BASE_URL_WHATSAPP}}"
+							],
+							"path": [
+								"health"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Message",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"purchaseId\": {{PURCHASE_ID}},\r\n  \"tripId\": {{TRIP_ID}},\r\n  \"message\": \"You got a free trip to your home.\",\r\n  \"user\": {\r\n    \"id\": 1,\r\n   \"email\": \"user@gmail.com\",\r\n   \"phone\": \"3056476572\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{BASE_URL_WHATSAPP}}/messages",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{BASE_URL_WHATSAPP}}"
+							],
+							"path": [
+								"messages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Messages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{BASE_URL_WHATSAPP}}/messages",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{BASE_URL_WHATSAPP}}"
+							],
+							"path": [
+								"messages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Clear Messages",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{BASE_URL_WHATSAPP}}/messages",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{BASE_URL_WHATSAPP}}"
+							],
+							"path": [
+								"messages"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
@@ -176,6 +380,26 @@
 		{
 			"key": "BASE_URL_STORE",
 			"value": "localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "BASE_URL_UBER",
+			"value": "localhost:3001",
+			"type": "string"
+		},
+		{
+			"key": "BASE_URL_WHATSAPP",
+			"value": "localhost:3002",
+			"type": "string"
+		},
+		{
+			"key": "PURCHASE_ID",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "TRIP_ID",
+			"value": "1",
 			"type": "string"
 		}
 	]
