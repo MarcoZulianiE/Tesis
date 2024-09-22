@@ -1,0 +1,175 @@
+version: "3.8"
+
+networks:
+  store_net:
+    driver: bridge
+  uber_net:
+    driver: bridge
+  whatsapp_net:
+    driver: bridge
+  rabbit_net:
+    driver: bridge
+
+services:
+  rabbitmq:
+    image: "rabbitmq:management"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - rabbit_net
+    healthcheck:
+      test: ["CMD-SHELL", "rabbitmq-diagnostics -q ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  store_api:
+    build: ../../api/store
+    environment:
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_HOST=store_db
+      - DB_PORT=5432
+      - DB_NAME=store
+    ports:
+      - "3000:3000"
+    networks:
+      - store_net
+    depends_on:
+      store_db:
+        condition: service_healthy
+
+  store_db:
+    image: "postgres:13"
+    environment:
+      - POSTGRES_DB=store
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - store_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  uber_api:
+    build: ../../api/uber
+    environment:
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_HOST=uber_db
+      - DB_PORT=5432
+      - DB_NAME=uber
+    ports:
+      - "3001:3001"
+    networks:
+      - uber_net
+    depends_on:
+      uber_db:
+        condition: service_healthy
+
+  uber_db:
+    image: "postgres:13"
+    environment:
+      - POSTGRES_DB=uber
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5433:5432"
+    networks:
+      - uber_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  whatsapp_api:
+    build: ../../api/whatsapp
+    environment:
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_HOST=whatsapp_db
+      - DB_PORT=5432
+      - DB_NAME=whatsapp
+    ports:
+      - "3002:3002"
+    networks:
+      - whatsapp_net
+    depends_on:
+      whatsapp_db:
+        condition: service_healthy
+
+  whatsapp_db:
+    image: "postgres:13"
+    environment:
+      - POSTGRES_DB=whatsapp
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5434:5432"
+    networks:
+      - whatsapp_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  store_server:
+    build: ./store
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_PROTOCOL=amqp
+      - RABBITMQ_USER=guest
+      - RABBITMQ_PASSWORD=guest
+      - STORE_API=http://store_api:3000
+    ports:
+      - "4000:4000"
+    networks:
+      - store_net
+      - rabbit_net
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+
+  uber_server:
+    build: ./uber
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_PROTOCOL=amqp
+      - RABBITMQ_USER=guest
+      - RABBITMQ_PASSWORD=guest
+      - UBER_API=http://uber_api:3001
+    ports:
+      - "4001:4000"
+    networks:
+      - uber_net
+      - rabbit_net
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+
+  whatsapp_server:
+    build: ./whatsapp
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_PROTOCOL=amqp
+      - RABBITMQ_USER=guest
+      - RABBITMQ_PASSWORD=guest
+      - WHATSAPP_API=http://whatsapp_api:3002
+    ports:
+      - "4002:4000"
+    networks:
+      - whatsapp_net
+      - rabbit_net
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
