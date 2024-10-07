@@ -2,16 +2,16 @@
 
 Esta API simula el servicio de **WhatsApp** utilizado en el escenario de integración propuesto en la tesis. Su función es representar un sistema de mensajería que permite enviar mensajes.
 
-## Indice
+## 0. Índice
 
-1. [Endpoints Disponibles](#endpoints-disponibles)
-2. [Ejecución](#ejecución)
+1. [Endpoints Disponibles](#1-endpoints-disponibles)
+2. [Ejecución](#2-ejecución)
 
-## Endpoints Disponibles
+## 1. Endpoints Disponibles
 
 La API de WhatsApp expone varios endpoints básicos para simular el envío de mensajes a los usuarios.
 
-### 1. Enviar un mensaje
+### 1.1. Enviar un mensaje
 
 <table>
   <tr>
@@ -36,8 +36,8 @@ La API de WhatsApp expone varios endpoints básicos para simular el envío de me
   "message": "You got a free trip to your home.",
   "user": {
     "id": 1,
-   "email": "user@gmail.com",
-   "phone": "3056476572"
+    "email": "user@gmail.com",
+    "phone": "3056476572"
   }
 }
       </pre>
@@ -65,7 +65,7 @@ La API de WhatsApp expone varios endpoints básicos para simular el envío de me
   </tr>
 </table>
 
-### 2. Obtener Todos los Mensajes
+### 1.2. Obtener Todos los Mensajes
 
 <table>
   <tr>
@@ -104,7 +104,7 @@ La API de WhatsApp expone varios endpoints básicos para simular el envío de me
   </tr>
 </table>
 
-### 3. Health
+### 1.3. Health
 
 <table>
   <tr>
@@ -127,7 +127,7 @@ La API de WhatsApp expone varios endpoints básicos para simular el envío de me
   </tr>
 </table>
 
-### 3. Eliminar Mensajes
+### 1.4. Eliminar Mensajes
 
 <table>
   <tr>
@@ -136,7 +136,7 @@ La API de WhatsApp expone varios endpoints básicos para simular el envío de me
   </tr>
   <tr>
     <th>Método HTTP</th>
-    <td>DELTE</td>
+    <td>DELETE</td>
   </tr>
   <tr>
     <th>URL</th>
@@ -150,50 +150,69 @@ La API de WhatsApp expone varios endpoints básicos para simular el envío de me
   </tr>
 </table>
 
-## Ejecución
+## 2. Ejecución
 
-### 1. Ejecución Local
+## 2.1. Configuración
+
+La API debe ser configurada usando variables de entorno con el fin de realizar la conexión con la base de datos:
+
+- `PORT`: Puerto en el que correrá la API (por defecto: `3000`).
+- `DB_HOST`: Host de la base de datos.
+- `DB_USER`: Usuario de la base de datos.
+- `DB_PASS`: Contraseña del usuario de la base de datos.
+- `DB_NAME`: Nombre de la base de datos.
+- `DB_PORT`: Puerto de la base de datos.
+
+### 2.2. Ejecución Local
 
 Para ejecutar la API localmente en tu máquina:
 
 1. Asegúrate de tener **Node.js** instalado.
+
 2. Clona el repositorio y navega al directorio `api/whatsapp`:
+
    ```bash
    git clone https://github.com/MarcoZulianiE/Tesis.git
    cd api/whatsapp
    ```
+
 3. Instala las dependencias:
+
    ```bash
    npm install
    ```
+
 4. Ejecuta la API:
+
    ```bash
-   node .
+   npm run start
    ```
+
 5. La API estará corriendo en `http://localhost:3000`.
 
-### 2. Ejecución con Docker
+### 2.3. Ejecución con Docker
 
 Si prefieres ejecutar la API en un contenedor Docker, sigue estos pasos:
 
 1. Asegúrate de tener **Docker** instalado.
-2. Desde el directorio raíz del proyecto `api/whatsapp`, construye la imagen de Docker:
+
+2. Clona el repositorio y navega al directorio `api/whatsapp`:
+
+   ```bash
+   git clone https://github.com/MarcoZulianiE/Tesis.git
+   cd api/whatsapp
+   ```
+
+3. Construye la imagen de Docker:
+
    ```bash
    docker build -t whatsapp-api .
    ```
-3. Ejecuta el contenedor:
+
+4. Ejecuta el contenedor:
+
    ```bash
    docker run -p 3000:3000 whatsapp-api
    ```
-4. La API estará disponible en `http://localhost:3000`.
 
-## Configuración
-
-La API debe ser configurada usando variables de entorno con el fin de realizar la conexión con la base de datos:
-
-- `PORT`: El puerto en el que corre la API. El valor por defecto es `3000`.
-- `DB_HOST`: El host de la base de datos.
-- `DB_USER`: El usuario de la base de datos.
-- `DB_PASS`: La contraseña del usuario de la base de datos.
-- `DB_NAME`: El nombre de la base de datos.
-- `DB_PORT`: El puerto en el que corre la base de datos.
+5. La API estará disponible en `http://localhost:3000`.
