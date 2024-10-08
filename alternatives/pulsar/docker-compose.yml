@@ -1,0 +1,251 @@
+version: "3.8"
+
+networks:
+  store_net:
+    driver: bridge
+  uber_net:
+    driver: bridge
+  whatsapp_net:
+    driver: bridge
+  pulsar_net:
+    driver: bridge
+
+services:
+  # Start zookeeper
+  zookeeper:
+    image: apachepulsar/pulsar:latest
+    container_name: zookeeper
+    restart: on-failure
+    networks:
+      - pulsar_net
+    volumes:
+      - ./data/zookeeper:/pulsar/data/zookeeper
+    environment:
+      - metadataStoreUrl=zk:zookeeper:2181
+      - PULSAR_MEM=-Xms256m -Xmx256m -XX:MaxDirectMemorySize=256m
+    command: >
+      bash -c "bin/apply-config-from-env.py conf/zookeeper.conf && \
+             bin/generate-zookeeper-config.sh conf/zookeeper.conf && \
+             exec bin/pulsar zookeeper"
+    healthcheck:
+      test: ["CMD", "bin/pulsar-zookeeper-ruok.sh"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+
+  # Init cluster metadata
+  pulsar-init:
+    container_name: pulsar-init
+    hostname: pulsar-init
+    image: apachepulsar/pulsar:latest
+    networks:
+      - pulsar_net
+    command: >
+      bin/pulsar initialize-cluster-metadata \
+               --cluster cluster-a \
+               --zookeeper zookeeper:2181 \
+               --configuration-store zookeeper:2181 \
+               --web-service-url http://broker:8080 \
+               --broker-service-url pulsar://broker:6650
+    depends_on:
+      zookeeper:
+        condition: service_healthy
+
+  # Start bookie
+  bookie:
+    image: apachepulsar/pulsar:latest
+    container_name: bookie
+    restart: on-failure
+    networks:
+      - pulsar_net
+    environment:
+      - clusterName=cluster-a
+      - zkServers=zookeeper:2181
+      - metadataServiceUri=metadata-store:zk:zookeeper:2181
+      # otherwise every time we run docker compose uo or down we fail to start due to Cookie
+      # See: https://github.com/apache/bookkeeper/blob/405e72acf42bb1104296447ea8840d805094c787/bookkeeper-server/src/main/java/org/apache/bookkeeper/bookie/Cookie.java#L57-68
+      - advertisedAddress=bookie
+      - BOOKIE_MEM=-Xms512m -Xmx512m -XX:MaxDirectMemorySize=256m
+    depends_on:
+      zookeeper:
+        condition: service_healthy
+      pulsar-init:
+        condition: service_completed_successfully
+    # Map the local directory to the container to avoid bookie startup failure due to insufficient container disks.
+    volumes:
+      - ./data/bookkeeper:/pulsar/data/bookkeeper
+    command: bash -c "bin/apply-config-from-env.py conf/bookkeeper.conf && exec bin/pulsar bookie"
+
+  # Start broker
+  broker:
+    image: apachepulsar/pulsar:latest
+    container_name: broker
+    hostname: broker
+    restart: on-failure
+    networks:
+      - pulsar_net
+    environment:
+      - metadataStoreUrl=zk:zookeeper:2181
+      - zookeeperServers=zookeeper:2181
+      - clusterName=cluster-a
+      - managedLedgerDefaultEnsembleSize=1
+      - managedLedgerDefaultWriteQuorum=1
+      - managedLedgerDefaultAckQuorum=1
+      - advertisedAddress=broker
+      - advertisedListeners=external:pulsar://127.0.0.1:6650
+      - PULSAR_MEM=-Xms512m -Xmx512m -XX:MaxDirectMemorySize=256m
+    depends_on:
+      zookeeper:
+        condition: service_healthy
+      bookie:
+        condition: service_started
+    ports:
+      - "6650:6650"
+      - "8080:8080"
+    command: bash -c "bin/apply-config-from-env.py conf/broker.conf && exec bin/pulsar broker"
+    healthcheck:
+      test: ["CMD", "bin/pulsar-broker-ruok.sh"] # Health check script for broker
+      interval: 10s
+      timeout: 5s
+      retries: 30
+
+  store_api:
+    build: ../../api/store
+    environment:
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_HOST=store_db
+      - DB_PORT=5432
+      - DB_NAME=store
+    ports:
+      - "3000:3000"
+    networks:
+      - store_net
+    depends_on:
+      store_db:
+        condition: service_healthy
+
+  store_db:
+    image: "postgres:13"
+    environment:
+      - POSTGRES_DB=store
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - store_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  uber_api:
+    build: ../../api/uber
+    environment:
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_HOST=uber_db
+      - DB_PORT=5432
+      - DB_NAME=uber
+    ports:
+      - "3001:3001"
+    networks:
+      - uber_net
+    depends_on:
+      uber_db:
+        condition: service_healthy
+
+  uber_db:
+    image: "postgres:13"
+    environment:
+      - POSTGRES_DB=uber
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5433:5432"
+    networks:
+      - uber_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  whatsapp_api:
+    build: ../../api/whatsapp
+    environment:
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_HOST=whatsapp_db
+      - DB_PORT=5432
+      - DB_NAME=whatsapp
+    ports:
+      - "3002:3002"
+    networks:
+      - whatsapp_net
+    depends_on:
+      whatsapp_db:
+        condition: service_healthy
+
+  whatsapp_db:
+    image: "postgres:13"
+    environment:
+      - POSTGRES_DB=whatsapp
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5434:5432"
+    networks:
+      - whatsapp_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  store_server:
+    build: ./store
+    environment:
+      - PULSAR_HOST=broker
+      - PULSAR_PORT=6650
+      - STORE_API=http://store_api:3000
+    ports:
+      - "4000:4000"
+    networks:
+      - store_net
+      - pulsar_net
+    depends_on:
+      broker:
+        condition: service_healthy
+
+  uber_server:
+    build: ./uber
+    environment:
+      - PULSAR_HOST=broker
+      - PULSAR_PORT=6650
+      - UBER_API=http://uber_api:3001
+    ports:
+      - "4001:4000"
+    networks:
+      - uber_net
+      - pulsar_net
+    depends_on:
+      broker:
+        condition: service_healthy
+
+  whatsapp_server:
+    build: ./whatsapp
+    environment:
+      - PULSAR_HOST=broker
+      - PULSAR_PORT=6650
+      - WHATSAPP_API=http://whatsapp_api:3002
+    ports:
+      - "4002:4000"
+    networks:
+      - whatsapp_net
+      - pulsar_net
+    depends_on:
+      broker:
+        condition: service_healthy
