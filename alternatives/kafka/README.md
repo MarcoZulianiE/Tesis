@@ -1,43 +1,43 @@
-# Alternativa: Kafka
+# Alternative: Kafka
 
-En este directorio se encuentra la implementación del escenario haciendo uso de la herramienta **Kafka**. Se implementan cada uno de los servicios intermediarios que permiten consumir las APIs de los servicios de **Store**, **Uber** y **WhatsApp**, a la vez que se encargan de la publicación y el consumo de mensajes en el broker de Kafka.
+This directory contains the implementation of the scenario using **Kafka**. Each of the intermediary services has been implemented to consume the APIs of **Store**, **Uber**, and **WhatsApp**, while also handling the publishing and consumption of messages in the Kafka broker.
 
-## 0. Índice
+## 0. Index
 
-1. [Sobre Kafka](#1-sobre-kafka)
-2. [Diagrama de Implementación](#2-diagrama-implementación)
-3. [Ejecución](#3-ejecución)
+1. [About Kafka](#1-about-kafka)
+2. [Implementation Diagram](#2-implementation-diagram)
+3. [Execution](#3-execution)
 
-## 1. Sobre Kafka
+## 1. About Kafka
 
-[Apache Kafka](https://kafka.apache.org/) es una plataforma de streaming de eventos distribuida de código abierto utilizada por miles de empresas.
+[Apache Kafka](https://kafka.apache.org/) is a distributed, open-source event streaming platform used by thousands of companies worldwide.
 
-## 2. Diagrama de Implementación
+## 2. Implementation Diagram
 
-El siguiente diagrama representa el flujo del proceso compuesto que se ejecuta para el cumplimiento del requerimiento del escenario establecido.
+The following diagram represents the flow of the composite process executed to fulfill the requirements of the established scenario.
 
-![Diagrama de componentes del escenario con el uso de Kafka](../../assets/kafka-diagram.png)
+![Component diagram of the scenario using Kafka](../../assets/kafka-diagram.png)
 
-## 3. Ejecución
+## 3. Execution
 
-Para la ejecución se utiliza **Docker Compose**. Docker Compose permite levantar todos los servicios del escenario de manera rápida y sencilla. Esto incluye la ejecución de todas las APIs, los servicios intermediarios de **Store**, **Uber** y **WhatsApp**, así como el broker de Kafka.
+**Docker Compose** is used for execution. Docker Compose allows you to quickly and easily start up all services in the scenario. This includes the execution of all APIs, the intermediary services for **Store**, **Uber**, and **WhatsApp**, as well as the Kafka broker.
 
-1. Asegúrate de tener **Docker** instalado.
+1. Ensure that **Docker** is installed.
 
-2. Clona el repositorio y navega al directorio de la alternativa `alternatives/kafka`:
+2. Clone the repository and navigate to the `alternatives/kafka` directory:
 
    ```bash
    git clone https://github.com/MarcoZulianiE/Tesis.git
    cd alternatives/kafka
    ```
 
-3. Ejecuta el siguiente comando para levantar los servicios:
+3. Run the following command to start the services:
 
    ```bash
    docker-compose up --build
    ```
 
-4. Para detener los servicios, usa:
+4. To stop the services, use:
    ```bash
    docker-compose down
    ```

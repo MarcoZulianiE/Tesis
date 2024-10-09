@@ -1,25 +1,25 @@
 # API: Uber
 
-Esta API simula el servicio de **Uber** utilizado en el escenario de integración propuesto en la tesis. Su función es representar el sistema de reserva de viajes.
+This API simulates the **Uber** service used in the integration scenario proposed in the thesis. Its purpose is to represent the ride booking system.
 
-## 0. Índice
+## 0. Index
 
-1. [Endpoints Disponibles](#1-endpoints-disponibles)
-2. [Ejecución](#2-ejecución)
+1. [Available Endpoints](#1-available-endpoints)
+2. [Execution](#2-execution)
 
-## 1. Endpoints Disponibles
+## 1. Available Endpoints
 
-La API de Uber expone varios endpoints básicos para simular el registro de viajes para los usuarios y consultar los viajes registrados.
+The Uber API exposes several basic endpoints to simulate ride bookings for users and to query registered trips.
 
-### 1.1. Registrar Viaje
+### 1.1. Register Trip
 
 <table>
   <tr>
-    <th>Descripción</th>
-    <td>Registra un nuevo viaje.</td>
+    <th>Description</th>
+    <td>Registers a new trip.</td>
   </tr>
   <tr>
-    <th>Método HTTP</th>
+    <th>HTTP Method</th>
     <td>POST</td>
   </tr>
   <tr>
@@ -41,7 +41,7 @@ La API de Uber expone varios endpoints básicos para simular el registro de viaj
     </td>
   </tr>
   <tr>
-    <th>Respuesta (201 - Created)</th>
+    <th>Response (201 - Created)</th>
     <td>
       <pre><code>{
   "id": 2,
@@ -60,15 +60,15 @@ La API de Uber expone varios endpoints básicos para simular el registro de viaj
   </tr>
 </table>
 
-### 1.2. Obtener Todos los Viajes
+### 1.2. Get All Trips
 
 <table>
   <tr>
-    <th>Descripción</th>
-    <td>Retorna todos los viajes registrados hasta el momento.</td>
+    <th>Description</th>
+    <td>Returns all registered trips.</td>
   </tr>
   <tr>
-    <th>Método HTTP</th>
+    <th>HTTP Method</th>
     <td>GET</td>
   </tr>
   <tr>
@@ -76,7 +76,7 @@ La API de Uber expone varios endpoints básicos para simular el registro de viaj
     <td>/trips</td>
   </tr>
   <tr>
-    <th>Respuesta (200 - OK)</th>
+    <th>Response (200 - OK)</th>
     <td>
       <pre><code>[
   {
@@ -101,11 +101,11 @@ La API de Uber expone varios endpoints básicos para simular el registro de viaj
 
 <table>
   <tr>
-    <th>Descripción</th>
-    <td>Validar el estado del servicio.</td>
+    <th>Description</th>
+    <td>Check the service status.</td>
   </tr>
   <tr>
-    <th>Método HTTP</th>
+    <th>HTTP Method</th>
     <td>GET</td>
   </tr>
   <tr>
@@ -113,20 +113,20 @@ La API de Uber expone varios endpoints básicos para simular el registro de viaj
     <td>/health</td>
   </tr>
   <tr>
-    <th>Respuesta (200 - OK)</th>
+    <th>Response (200 - OK)</th>
     <td>API Uber works</td>
   </tr>
 </table>
 
-### 1.4. Eliminar Viajes
+### 1.4. Delete Trips
 
 <table>
   <tr>
-    <th>Descripción</th>
-    <td>Elimina todos los viajes de la base de datos.</td>
+    <th>Description</th>
+    <td>Deletes all trips from the database.</td>
   </tr>
   <tr>
-    <th>Método HTTP</th>
+    <th>HTTP Method</th>
     <td>DELETE</td>
   </tr>
   <tr>
@@ -134,74 +134,74 @@ La API de Uber expone varios endpoints básicos para simular el registro de viaj
     <td>/trips</td>
   </tr>
   <tr>
-    <th>Respuesta (204 - No Content)</th>
+    <th>Response (204 - No Content)</th>
     <td>Empty</td>
   </tr>
 </table>
 
-## 2. Ejecución
+## 2. Execution
 
-## 2.1. Configuración
+### 2.1. Configuration
 
-La API debe ser configurada usando variables de entorno con el fin de realizar la conexión con la base de datos:
+The API must be configured using environment variables to establish the connection with the database:
 
-- `PORT`: Puerto en el que correrá la API (por defecto: `3000`).
-- `DB_HOST`: Host de la base de datos.
-- `DB_USER`: Usuario de la base de datos.
-- `DB_PASS`: Contraseña del usuario de la base de datos.
-- `DB_NAME`: Nombre de la base de datos.
-- `DB_PORT`: Puerto de la base de datos.
+- `PORT`: Port on which the API will run (default: `3000`).
+- `DB_HOST`: Database host.
+- `DB_USER`: Database user.
+- `DB_PASS`: Database user password.
+- `DB_NAME`: Database name.
+- `DB_PORT`: Database port.
 
-### 2.2. Ejecución Local
+### 2.2. Local Execution
 
-Para ejecutar la API localmente en tu máquina:
+To run the API locally on your machine:
 
-1. Asegúrate de tener **Node.js** instalado.
+1. Make sure you have **Node.js** installed.
 
-2. Clona el repositorio y navega al directorio `api/uber`:
+2. Clone the repository and navigate to the `api/uber` directory:
 
    ```bash
    git clone https://github.com/MarcoZulianiE/Tesis.git
    cd api/uber
    ```
 
-3. Instala las dependencias:
+3. Install the dependencies:
 
    ```bash
    npm install
    ```
 
-4. Ejecuta la API:
+4. Run the API:
 
    ```bash
    npm run start
    ```
 
-5. La API estará corriendo en `http://localhost:3000`.
+5. The API will be running at `http://localhost:3000`.
 
-### 2.3. Ejecución con Docker
+### 2.3. Running with Docker
 
-Si prefieres ejecutar la API en un contenedor Docker, sigue estos pasos:
+If you prefer to run the API in a Docker container, follow these steps:
 
-1. Asegúrate de tener **Docker** instalado.
+1. Make sure you have **Docker** installed.
 
-2. Clona el repositorio y navega al directorio `api/uber`:
+2. Clone the repository and navigate to the `api/uber` directory:
 
    ```bash
    git clone https://github.com/MarcoZulianiE/Tesis.git
    cd api/uber
    ```
 
-3. Construye la imagen de Docker:
+3. Build the Docker image:
 
    ```bash
    docker build -t uber-api .
    ```
 
-4. Ejecuta el contenedor:
+4. Run the container:
 
    ```bash
    docker run -p 3000:3000 uber-api
    ```
 
-5. La API estará disponible en `http://localhost:3000`.
+5. The API will be available at `http://localhost:3000`.

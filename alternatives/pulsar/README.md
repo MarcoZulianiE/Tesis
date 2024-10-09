@@ -1,43 +1,43 @@
-# Alternativa: Pulsar
+# Alternative: Pulsar
 
-En este directorio se encuentra la implementación del escenario haciendo uso de la herramienta **Apache Pulsar**. Se implementan los servicios de puente que permiten consumir las APIs de los servicios, así como la publicación y el consumo de mensajes en el broker de Pulsar.
+This directory contains the implementation of the scenario using **Apache Pulsar**. The bridge services have been implemented to consume the APIs of the services, as well as to handle the publishing and consumption of messages in the Pulsar broker.
 
-## 0. Índice
+## 0. Index
 
-1. [Sobre Pulsar](#1-sobre-pulsar)
-2. [Diagrama de Implementación](#2-diagrama-de-implementación)
-3. [Ejecución](#3-ejecución)
+1. [About Pulsar](#1-about-pulsar)
+2. [Implementation Diagram](#2-implementation-diagram)
+3. [Execution](#3-execution)
 
-## 1. Sobre Pulsar
+## 1. About Pulsar
 
-[Apache Pulsar](https://pulsar.apache.org/) es una plataforma de mensajería y streaming de eventos distribuida, que ofrece características de alta disponibilidad y escalabilidad. Es conocida por su arquitectura de múltiples inquilinos y su capacidad para manejar grandes volúmenes de datos en tiempo real.
+[Apache Pulsar](https://pulsar.apache.org/) is a distributed messaging and event streaming platform known for its high availability and scalability. It is recognized for its multi-tenant architecture and its ability to handle large volumes of real-time data.
 
-## 2. Diagrama de Implementación
+## 2. Implementation Diagram
 
-El siguiente diagrama representa el flujo del proceso compuesto que se ejecuta para el cumplimiento del requerimiento del escenario establecido.
+The following diagram represents the flow of the composite process executed to fulfill the requirements of the established scenario.
 
-![Diagrama de componentes del escenario con el uso de Pulsar](../../assets/pulsar-diagram.png)
+![Component diagram of the scenario using Pulsar](../../assets/pulsar-diagram.png)
 
-## 3. Ejecución
+## 3. Execution
 
-Para la ejecución se utiliza **Docker Compose**. Docker Compose permite levantar todos los servicios del escenario de manera rápida y sencilla. Esto incluye la ejecución de todas las APIs y los servicios intermediarios de **Store**, **Uber** y **WhatsApp**, así como el broker de Pulsar.
+**Docker Compose** is used for execution. Docker Compose allows you to quickly and easily start up all the services in the scenario. This includes the execution of all APIs, the intermediary services for **Store**, **Uber**, and **WhatsApp**, as well as the Pulsar broker.
 
-1. Asegúrate de tener **Docker** instalado.
+1. Ensure that **Docker** is installed.
 
-2. Clona el repositorio y navega al directorio de la alternativa `alternatives\pulsar`:
+2. Clone the repository and navigate to the `alternatives\pulsar` directory:
 
    ```bash
    git clone https://github.com/MarcoZulianiE/Tesis.git
    cd alternatives\pulsar
    ```
 
-3. Ejecuta el siguiente comando para levantar los servicios:
+3. Run the following command to start the services:
 
    ```bash
    docker-compose up --build
    ```
 
-4. Para detener los servicios, usa:
+4. To stop the services, use:
    ```bash
    docker-compose down
    ```

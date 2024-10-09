@@ -1,27 +1,25 @@
 # API: Store
 
-Esta API simula el servicio de **Store** utilizado en el escenario de integración propuesto en la tesis. Su función principal es registrar ventas y proporcionar la capacidad de consultar las ventas registradas.
+This API simulates the **Store** service used in the integration scenario proposed in the thesis. Its main function is to record sales and provide the ability to query recorded sales.
 
-## 0. Índice
+## 0. Index
 
-1. [Endpoints Disponibles](#1-endpoints-disponibles)
-2. [Ejecución](#2-ejecución)
+1. [Available Endpoints](#1-available-endpoints)
+2. [Execution](#2-execution)
 
-## 1. Endpoints Disponibles
+## 1. Available Endpoints
 
-La API de Store expone varios endpoints básicos para simular el registro de compras realizadas por los clientes y la obtención de las mismas.
+The Store API exposes several basic endpoints to simulate the recording of purchases made by customers and their retrieval.
 
-Aquí tienes el formato corregido, con el JSON colocado dentro de las celdas de la tabla y el error en el método `DELETE` corregido:
-
-### 1.1. Registrar una Compra
+### 1.1. Register a Purchase
 
 <table>
   <tr>
-    <th>Descripción</th>
-    <td>Registra una nueva o varias compras en la tienda.</td>
+    <th>Description</th>
+    <td>Records a new or multiple purchases in the store.</td>
   </tr>
   <tr>
-    <th>Método HTTP</th>
+    <th>HTTP Method</th>
     <td>POST</td>
   </tr>
   <tr>
@@ -29,8 +27,8 @@ Aquí tienes el formato corregido, con el JSON colocado dentro de las celdas de 
     <td>/purchases</td>
   </tr>
   <tr>
-    <th>Parámetros</th>
-    <td><code>count</code>: número de compras a registrar. (Opcional)</td>
+    <th>Parameters</th>
+    <td><code>count</code>: number of purchases to register. (Optional)</td>
   </tr>
   <tr>
     <th>Body</th>
@@ -47,7 +45,7 @@ Aquí tienes el formato corregido, con el JSON colocado dentro de las celdas de 
     </td>
   </tr>
   <tr>
-    <th>Respuesta (201 - Created)</th>
+    <th>Response (201 - Created)</th>
     <td>
       <pre><code>[
   {
@@ -67,15 +65,15 @@ Aquí tienes el formato corregido, con el JSON colocado dentro de las celdas de 
   </tr>
 </table>
 
-### 1.2. Obtener Todas las Compras
+### 1.2. Get All Purchases
 
 <table>
   <tr>
-    <th>Descripción</th>
-    <td>Retorna todas las compras registradas hasta el momento.</td>
+    <th>Description</th>
+    <td>Returns all purchases recorded up to the present.</td>
   </tr>
   <tr>
-    <th>Método HTTP</th>
+    <th>HTTP Method</th>
     <td>GET</td>
   </tr>
   <tr>
@@ -83,11 +81,11 @@ Aquí tienes el formato corregido, con el JSON colocado dentro de las celdas de 
     <td>/purchases</td>
   </tr>
   <tr>
-    <th>Parámetros</th>
-    <td><code>lastChecked</code>: fecha a partir de la cuál buscar compras. (Opcional)</td>
+    <th>Parameters</th>
+    <td><code>lastChecked</code>: date from which to search for purchases. (Optional)</td>
   </tr>
   <tr>
-    <th>Respuesta (200 - OK)</th>
+    <th>Response (200 - OK)</th>
     <td>
       <pre><code>[
   {
@@ -111,11 +109,11 @@ Aquí tienes el formato corregido, con el JSON colocado dentro de las celdas de 
 
 <table>
   <tr>
-    <th>Descripción</th>
-    <td>Validar el estado del servicio.</td>
+    <th>Description</th>
+    <td>Validates the service status.</td>
   </tr>
   <tr>
-    <th>Método HTTP</th>
+    <th>HTTP Method</th>
     <td>GET</td>
   </tr>
   <tr>
@@ -123,20 +121,20 @@ Aquí tienes el formato corregido, con el JSON colocado dentro de las celdas de 
     <td>/health</td>
   </tr>
   <tr>
-    <th>Respuesta (200 - OK)</th>
+    <th>Response (200 - OK)</th>
     <td>API Store works</td>
   </tr>
 </table>
 
-### 1.4. Eliminar Compras
+### 1.4. Delete Purchases
 
 <table>
   <tr>
-    <th>Descripción</th>
-    <td>Elimina todas las compras de la base de datos.</td>
+    <th>Description</th>
+    <td>Deletes all purchases from the database.</td>
   </tr>
   <tr>
-    <th>Método HTTP</th>
+    <th>HTTP Method</th>
     <td>DELETE</td>
   </tr>
   <tr>
@@ -144,74 +142,74 @@ Aquí tienes el formato corregido, con el JSON colocado dentro de las celdas de 
     <td>/purchases</td>
   </tr>
   <tr>
-    <th>Respuesta (204 - No Content)</th>
+    <th>Response (204 - No Content)</th>
     <td>Empty</td>
   </tr>
 </table>
 
-## 2. Ejecución
+## 2. Execution
 
-### 2.1. Configuración
+### 2.1. Configuration
 
-La API debe ser configurada usando variables de entorno con el fin de realizar la conexión con la base de datos:
+The API must be configured using environment variables in order to connect to the database:
 
-- `PORT`: Puerto en el que correrá la API (por defecto: `3000`).
-- `DB_HOST`: Host de la base de datos.
-- `DB_USER`: Usuario de la base de datos.
-- `DB_PASS`: Contraseña del usuario de la base de datos.
-- `DB_NAME`: Nombre de la base de datos.
-- `DB_PORT`: Puerto de la base de datos.
+- `PORT`: Port on which the API will run (default: `3000`).
+- `DB_HOST`: Database host.
+- `DB_USER`: Database user.
+- `DB_PASS`: Database user password.
+- `DB_NAME`: Database name.
+- `DB_PORT`: Database port.
 
-### 2.2. Ejecución Local
+### 2.2. Local Execution
 
-Sigue estos pasos para ejecutar la API localmente:
+Follow these steps to run the API locally:
 
-1. Asegúrate de tener **Node.js** instalado.
+1. Ensure you have **Node.js** installed.
 
-2. Clona el repositorio y navega al directorio `api/store`:
+2. Clone the repository and navigate to the `api/store` directory:
 
    ```bash
    git clone https://github.com/MarcoZulianiE/Tesis.git
    cd api/store
    ```
 
-3. Instala las dependencias:
+3. Install the dependencies:
 
    ```bash
    npm install
    ```
 
-4. Ejecuta la API:
+4. Run the API:
 
    ```bash
    npm run start
    ```
 
-5. La API estará disponible en `http://localhost:3000`.
+5. The API will be available at `http://localhost:3000`.
 
-### 2.3. Ejecución con Docker
+### 2.3. Execution with Docker
 
-Si prefieres ejecutar la API dentro de un contenedor Docker, sigue estos pasos:
+If you prefer to run the API inside a Docker container, follow these steps:
 
-1. Asegúrate de tener **Docker** instalado.
+1. Ensure you have **Docker** installed.
 
-2. Clona el repositorio y navega al directorio `api/store`:
+2. Clone the repository and navigate to the `api/store` directory:
 
    ```bash
    git clone https://github.com/MarcoZulianiE/Tesis.git
    cd api/store
    ```
 
-3. Construye la imagen de Docker:
+3. Build the Docker image:
 
    ```bash
    docker build -t store-api .
    ```
 
-4. Ejecuta el contenedor:
+4. Run the container:
 
    ```bash
    docker run -p 3000:3000 store-api
    ```
 
-5. La API estará disponible en `http://localhost:3000`.
+5. The API will be available at `http://localhost:3000`.

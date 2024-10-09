@@ -1,40 +1,40 @@
-# Alternativas de Implementación
+# Implementation Alternatives
 
-Este directorio contiene las implementaciones de los servicios para cada una de las alternativas de brokers de eventos y mensajes que se han analizado y desarrollado como parte de la solución propuesta en la tesis.
+This directory contains the service implementations for each of the event and message broker alternatives that have been analyzed and developed as part of the proposed solution in the thesis.
 
-## 0. Índice
+## 0. Index
 
-1. [Descripción General](#1-descripción-general)
-2. [Consideraciones](#2-consideraciones)
-3. [Estructura del Directorio](#3-estructura-del-directorio)
-4. [Ejecución](#4-ejecución)
+1. [General Description](#1-general-description)
+2. [Considerations](#2-considerations)
+3. [Directory Structure](#3-directory-structure)
+4. [Execution](#4-execution)
 
-## 1. Descripción General
+## 1. General Description
 
-A partir del escenario planteado mediante **orquestación** y luego de realizar un análisis para determinar las mejores herramientas para la implementación de **brokers de eventos y mensajes**, se procedió a implementar el escenario utilizando cada una de estas herramientas: **RabbitMQ**, **Kafka** y **Pulsar**. Cada implementación ha sido diseñada para cumplir con los requisitos de la solución, asegurando una integración efectiva entre los servicios involucrados.
+Based on the scenario initially defined through **orchestration**, and after conducting an analysis to determine the best tools for implementing **event and message brokers**, the scenario was implemented using each of these tools: **RabbitMQ**, **Kafka**, and **Pulsar**. Each implementation has been designed to meet the solution's requirements, ensuring effective integration between the involved services.
 
-## 2. Consideraciones
+## 2. Considerations
 
-- Dado que los servicios disponibles solo exponen APIs públicas y **no pueden ser modificados**, se requiere crear un **servicio intermediario**. Este servicio será responsable de realizar toda la lógica necesaria para el cumplimiento de su tarea, junto con las llamadas a las APIs y la gestión de la producción y el consumo de los mensajes publicados en el **broker de mensajería**.
-- Cada uno de los brokers tiene características y configuraciones únicas, lo que requiere ajustes en la implementación de los servicios intermediarios para adaptarse a la herramienta utilizada.
+- Since the available services only expose public APIs and **cannot be modified**, an **intermediary service** needs to be created. This service will handle all the necessary logic to fulfill its task, along with API calls and the management of producing and consuming messages published in the **messaging broker**.
+- Each broker has unique characteristics and configurations, requiring adjustments in the intermediary service implementations to adapt to the specific tool being used.
 
-## 3. Estructura del Directorio
+## 3. Directory Structure
 
-El directorio de **Alternatives** contiene un directorio por cada una de las implementaciones realizadas con cada una de las herramientas.
+The **Alternatives** directory contains a subdirectory for each of the implementations made with the different tools.
 
 ```
-├── kafka         // Escenario implementado con Kafka MQ
-├── pulsar        // Escenario implementado con Pulsar
-├── rabbit-mq     // Escenario implementado con RabbitMQ
-└── README.md     // Usted está aquí
+├── kafka         // Scenario implemented with Kafka MQ
+├── pulsar        // Scenario implemented with Pulsar
+├── rabbit-mq     // Scenario implemented with RabbitMQ
+└── README.md     // You are here
 ```
 
-Dentro de cada alternativa se encuentra la implementación de los tres servicios intermediarios, con la configuración necesaria para utilizar la herramienta.
+Within each alternative, you will find the implementation of the three intermediary services, along with the necessary configuration to use the selected tool.
 
-## 4. Ejecución
+## 4. Execution
 
-Para cada una de las herramientas seleccionadas, se ha realizado una implementación específica de los tres servicios: **Store**, **WhatsApp** y **Uber**.
+For each of the selected tools, a specific implementation of the three services—**Store**, **WhatsApp**, and **Uber**—has been carried out.
 
-Todas las implementaciones comparten los mismos APIs de **Store**, **WhatsApp** y **Uber**. La principal variación entre las implementaciones es la herramienta utilizada como **broker de mensajería** y la configuración de los servicios intermediarios para adaptarse a cada uno de estos.
+All implementations share the same **Store**, **WhatsApp**, and **Uber** APIs. The main difference between the implementations is the tool used as the **messaging broker** and the configuration of the intermediary services to adapt to each of them.
 
-En términos generales, la lógica es la misma en todos los casos, dado que los servicios producen o consumen mensajes que se adaptan a la herramienta utilizada. La lógica aplicada es consistente entre los mismos servicios de las diferentes implementaciones, garantizando una estructura coherente en la forma de trabajar con los datos y las interacciones de servicio.
+In general terms, the logic remains the same across all cases, as the services produce or consume messages that are tailored to the tool used. The applied logic is consistent across the same services in the different implementations, ensuring a coherent structure in handling data and service interactions.
