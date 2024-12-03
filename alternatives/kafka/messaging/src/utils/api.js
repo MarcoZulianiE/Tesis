@@ -2,7 +2,7 @@ import config from "../config/config.js";
 
 export async function createMessage(message) {
   try {
-    const response = await fetch(`${config.WHATSAPP_API}/messages`, {
+    const response = await fetch(`${config.MESSAGING_API}/messages`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

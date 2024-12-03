@@ -4,20 +4,20 @@ import { createTrip } from "./utils/api.js";
 import { Kafka } from "kafkajs";
 
 const kafka = new Kafka({
-  clientId: "uber-server",
+  clientId: "transportation-server",
   brokers: [`${config.KAFKA_HOST}:${config.KAFKA_PORT}`],
 });
 
-const uberTopic = config.UBER_TOPIC;
-const whatsappTopic = config.WHATSAPP_TOPIC;
+const transportationTopic = config.TRANSPORTATION_TOPIC;
+const messagingTopic = config.MESSAGING_TOPIC;
 
-const consumer = kafka.consumer({ groupId: "uber-group" });
+const consumer = kafka.consumer({ groupId: "transportation-group" });
 const producer = kafka.producer();
 
 await consumer.connect();
 await producer.connect();
 
-await consumer.subscribe({ topic: uberTopic, fromBeginning: true });
+await consumer.subscribe({ topic: transportationTopic, fromBeginning: true });
 
 await consumer.run({
   eachMessage: async ({ topic, partition, message }) => {
@@ -35,7 +35,7 @@ await consumer.run({
     });
 
     await producer.send({
-      topic: whatsappTopic,
+      topic: messagingTopic,
       messages: [{ value: JSON.stringify(createEvent(trip.id, trip)) }],
     });
     console.log("Message sent for Purchase with id: " + purchase.id);

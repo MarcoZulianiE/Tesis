@@ -8,7 +8,7 @@ const kafka = new Kafka({
   brokers: [`${config.KAFKA_HOST}:${config.KAFKA_PORT}`],
 });
 
-const uberTopic = config.UBER_TOPIC;
+const transportationTopic = config.TRANSPORTATION_TOPIC;
 
 /**
  * Checks recent store purchases and sends an event if the purchase value meets the specified threshold.
@@ -20,7 +20,7 @@ async function checkStorePurchases(producer, lastCheckedDate) {
   for (const purchase of purchases) {
     if (purchase.total >= 150000) {
       await producer.send({
-        topic: uberTopic,
+        topic: transportationTopic,
         messages: [
           { value: JSON.stringify(createEvent(purchase.id, purchase)) },
         ],

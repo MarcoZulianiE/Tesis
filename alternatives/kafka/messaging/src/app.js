@@ -3,17 +3,17 @@ import { createMessage } from "./utils/api.js";
 import { Kafka } from "kafkajs";
 
 const kafka = new Kafka({
-  clientId: "whatsapp-server",
+  clientId: "messaging-server",
   brokers: [`${config.KAFKA_HOST}:${config.KAFKA_PORT}`],
 });
 
-const whatsappTopic = config.WHATSAPP_TOPIC;
+const messagingTopic = config.MESSAGING_TOPIC;
 
-const consumer = kafka.consumer({ groupId: "whatsapp-group" });
+const consumer = kafka.consumer({ groupId: "messaging-group" });
 
 await consumer.connect();
 
-await consumer.subscribe({ topic: whatsappTopic, fromBeginning: true });
+await consumer.subscribe({ topic: messagingTopic, fromBeginning: true });
 
 await consumer.run({
   eachMessage: async ({ message }) => {
