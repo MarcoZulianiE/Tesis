@@ -2,13 +2,7 @@ import Purchase from "../models/purchase.js";
 
 export async function createPurchase(req, res) {
   try {
-    const count = req.query.count || 1;
-    const purchases = [];
-
-    for (let i = 0; i < count; i++) {
-      purchases.push(await Purchase.create(req.body));
-    }
-    res.status(201).json(purchases);
+    res.status(201).json(await Purchase.create(req.body));
   } catch (error) {
     res.status(400).json({ error: "Error creating purchase" });
   }

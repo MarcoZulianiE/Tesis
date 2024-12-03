@@ -1,0 +1,787 @@
+{
+	"info": {
+		"_postman_id": "d09efacf-90d3-4673-8d26-9d422575904a",
+		"name": "API",
+		"description": "Collection containing the API Requests for the Services of the Case Study Scenario.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28502076"
+	},
+	"item": [
+		{
+			"name": "Store",
+			"item": [
+				{
+					"name": "Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{BASE_URL_STORE}}/health",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{BASE_URL_STORE}}"
+							],
+							"path": [
+								"health"
+							]
+						},
+						"description": "Validates Service Health."
+					},
+					"response": [
+						{
+							"name": "Health",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/health",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"health"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "API Store works"
+						}
+					]
+				},
+				{
+					"name": "Create Purchase",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"items\": [\"item1\", \"item2\", \"item3\"],\r\n  \"total\": 123.45,\r\n  \"user\": {\r\n    \"id\": 1,\r\n   \"email\": \"user@gmail.com\",\r\n   \"phone\": \"3056476572\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{BASE_URL_STORE}}/purchases",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{BASE_URL_STORE}}"
+							],
+							"path": [
+								"purchases"
+							]
+						},
+						"description": "Creates a purchase with the given information."
+					},
+					"response": [
+						{
+							"name": "Create Purchase",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"items\": [\"item1\", \"item2\", \"item3\"],\r\n  \"total\": 123.45,\r\n  \"user\": {\r\n    \"id\": 1,\r\n   \"email\": \"user@gmail.com\",\r\n   \"phone\": \"3056476572\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/purchases?count=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"purchases"
+									],
+									"query": [
+										{
+											"key": "count",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 76,\n    \"items\": [\n        \"item1\",\n        \"item2\",\n        \"item3\"\n    ],\n    \"total\": 123.45,\n    \"user\": {\n        \"id\": 1,\n        \"email\": \"user@gmail.com\",\n        \"phone\": \"3056476572\"\n    },\n    \"updatedAt\": \"2024-12-03T04:09:11.675Z\",\n    \"createdAt\": \"2024-12-03T04:09:11.675Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Purchases",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{BASE_URL_STORE}}/purchases",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{BASE_URL_STORE}}"
+							],
+							"path": [
+								"purchases"
+							]
+						},
+						"description": "Gets all the stores' purchases."
+					},
+					"response": [
+						{
+							"name": "Get Purchases",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/purchases",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"purchases"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 38,\n        \"items\": [\n            \"item1\",\n            \"item2\",\n            \"item3\"\n        ],\n        \"total\": 170000,\n        \"user\": {\n            \"id\": 1,\n            \"email\": \"user@gmail.com\",\n            \"phone\": \"3056476572\"\n        },\n        \"createdAt\": \"2024-09-22T18:44:44.630Z\",\n        \"updatedAt\": \"2024-09-22T18:44:44.630Z\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get New Purchases",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{BASE_URL_STORE}}/purchases?lastChecked=2024-09-16T16:47:01.531Z",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{BASE_URL_STORE}}"
+							],
+							"path": [
+								"purchases"
+							],
+							"query": [
+								{
+									"key": "lastChecked",
+									"value": "2024-09-16T16:47:01.531Z"
+								}
+							]
+						},
+						"description": "Gets the purchases done in the store after the specified date."
+					},
+					"response": [
+						{
+							"name": "Get New Purchases",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/purchases?lastChecked=2024-09-16T16:47:01.531Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"purchases"
+									],
+									"query": [
+										{
+											"key": "lastChecked",
+											"value": "2024-09-16T16:47:01.531Z"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 38,\n        \"items\": [\n            \"item1\",\n            \"item2\",\n            \"item3\"\n        ],\n        \"total\": 170000,\n        \"user\": {\n            \"id\": 1,\n            \"email\": \"user@gmail.com\",\n            \"phone\": \"3056476572\"\n        },\n        \"createdAt\": \"2024-09-22T18:44:44.630Z\",\n        \"updatedAt\": \"2024-09-22T18:44:44.630Z\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Clear Purchases",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{BASE_URL_STORE}}/purchases",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{BASE_URL_STORE}}"
+							],
+							"path": [
+								"purchases"
+							]
+						},
+						"description": "Clears all the purchases made in the store."
+					},
+					"response": [
+						{
+							"name": "Clear Purchases",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/purchases",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"purchases"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			],
+			"description": "API for the Store Service."
+		},
+		{
+			"name": "Transportation",
+			"item": [
+				{
+					"name": "Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{BASE_URL_UBER}}/health",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{BASE_URL_UBER}}"
+							],
+							"path": [
+								"health"
+							]
+						},
+						"description": "Validates Service Health."
+					},
+					"response": [
+						{
+							"name": "Health",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{PROTOCOL}}://{{BASE_URL_UBER}}/health",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{BASE_URL_UBER}}"
+									],
+									"path": [
+										"health"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "Transportation API works"
+						}
+					]
+				},
+				{
+					"name": "Create Trip",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"origin\": \"store\",\r\n  \"purchaseId\": {{PURCHASE_ID}},\r\n  \"user\": {\r\n    \"id\": 1,\r\n   \"email\": \"user@gmail.com\",\r\n   \"phone\": \"3056476572\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{BASE_URL_UBER}}/trips",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{BASE_URL_UBER}}"
+							],
+							"path": [
+								"trips"
+							]
+						},
+						"description": "Creates a new trip with the given information."
+					},
+					"response": [
+						{
+							"name": "Create Trip",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"origin\": \"store\",\r\n  \"purchaseId\": {{PURCHASE_ID}},\r\n  \"user\": {\r\n    \"id\": 1,\r\n   \"email\": \"user@gmail.com\",\r\n   \"phone\": \"3056476572\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROTOCOL}}://{{BASE_URL_UBER}}/trips",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{BASE_URL_UBER}}"
+									],
+									"path": [
+										"trips"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"origin\": \"store\",\n    \"purchaseId\": 1,\n    \"user\": {\n        \"id\": 1,\n        \"email\": \"user@gmail.com\",\n        \"phone\": \"3056476572\"\n    },\n    \"destination\": \"Venezuela\",\n    \"updatedAt\": \"2024-12-03T04:24:30.938Z\",\n    \"createdAt\": \"2024-12-03T04:24:30.938Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Trips",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{BASE_URL_UBER}}/trips",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{BASE_URL_UBER}}"
+							],
+							"path": [
+								"trips"
+							]
+						},
+						"description": "Gets all the trips created."
+					},
+					"response": [
+						{
+							"name": "Get Trips",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{PROTOCOL}}://{{BASE_URL_UBER}}/trips",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{BASE_URL_UBER}}"
+									],
+									"path": [
+										"trips"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"origin\": \"store\",\n        \"destination\": \"Venezuela\",\n        \"purchaseId\": 1,\n        \"user\": {\n            \"id\": 1,\n            \"email\": \"user@gmail.com\",\n            \"phone\": \"3056476572\"\n        },\n        \"createdAt\": \"2024-12-03T04:24:30.938Z\",\n        \"updatedAt\": \"2024-12-03T04:24:30.938Z\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Clear Trips",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{BASE_URL_UBER}}/trips",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{BASE_URL_UBER}}"
+							],
+							"path": [
+								"trips"
+							]
+						},
+						"description": "Clears all the trips."
+					},
+					"response": [
+						{
+							"name": "Clear Trips",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{PROTOCOL}}://{{BASE_URL_UBER}}/trips",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{BASE_URL_UBER}}"
+									],
+									"path": [
+										"trips"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			],
+			"description": "API for the Transportation Service."
+		},
+		{
+			"name": "Messaging",
+			"item": [
+				{
+					"name": "Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{BASE_URL_WHATSAPP}}/health",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{BASE_URL_WHATSAPP}}"
+							],
+							"path": [
+								"health"
+							]
+						},
+						"description": "Validates Service Health."
+					},
+					"response": [
+						{
+							"name": "Health",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{PROTOCOL}}://{{BASE_URL_WHATSAPP}}/health",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{BASE_URL_WHATSAPP}}"
+									],
+									"path": [
+										"health"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "Messaging API works"
+						}
+					]
+				},
+				{
+					"name": "Create Message",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"purchaseId\": {{PURCHASE_ID}},\r\n  \"tripId\": {{TRIP_ID}},\r\n  \"message\": \"You got a free trip to your home.\",\r\n  \"user\": {\r\n    \"id\": 1,\r\n   \"email\": \"user@gmail.com\",\r\n   \"phone\": \"3056476572\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{BASE_URL_WHATSAPP}}/messages",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{BASE_URL_WHATSAPP}}"
+							],
+							"path": [
+								"messages"
+							]
+						},
+						"description": "Creates a new message with the given information."
+					},
+					"response": [
+						{
+							"name": "Create Message",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"purchaseId\": {{PURCHASE_ID}},\r\n  \"tripId\": {{TRIP_ID}},\r\n  \"message\": \"You got a free trip to your home.\",\r\n  \"user\": {\r\n    \"id\": 1,\r\n   \"email\": \"user@gmail.com\",\r\n   \"phone\": \"3056476572\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PROTOCOL}}://{{BASE_URL_WHATSAPP}}/messages",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{BASE_URL_WHATSAPP}}"
+									],
+									"path": [
+										"messages"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"purchaseId\": 1,\n    \"tripId\": 1,\n    \"message\": \"You got a free trip to your home.\",\n    \"user\": {\n        \"id\": 1,\n        \"email\": \"user@gmail.com\",\n        \"phone\": \"3056476572\"\n    },\n    \"updatedAt\": \"2024-12-03T04:26:08.716Z\",\n    \"createdAt\": \"2024-12-03T04:26:08.716Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Messages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{BASE_URL_WHATSAPP}}/messages",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{BASE_URL_WHATSAPP}}"
+							],
+							"path": [
+								"messages"
+							]
+						},
+						"description": "Gets all the messages created."
+					},
+					"response": [
+						{
+							"name": "Get Messages",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{PROTOCOL}}://{{BASE_URL_WHATSAPP}}/messages",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{BASE_URL_WHATSAPP}}"
+									],
+									"path": [
+										"messages"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"purchaseId\": 1,\n        \"tripId\": 1,\n        \"message\": \"You got a free trip to your home.\",\n        \"user\": {\n            \"id\": 1,\n            \"email\": \"user@gmail.com\",\n            \"phone\": \"3056476572\"\n        },\n        \"createdAt\": \"2024-12-03T04:26:08.716Z\",\n        \"updatedAt\": \"2024-12-03T04:26:08.716Z\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Clear Messages",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{BASE_URL_WHATSAPP}}/messages",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{BASE_URL_WHATSAPP}}"
+							],
+							"path": [
+								"messages"
+							]
+						},
+						"description": "Clears all the messages created."
+					},
+					"response": [
+						{
+							"name": "Clear Messages",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{PROTOCOL}}://{{BASE_URL_WHATSAPP}}/messages",
+									"protocol": "{{PROTOCOL}}",
+									"host": [
+										"{{BASE_URL_WHATSAPP}}"
+									],
+									"path": [
+										"messages"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			],
+			"description": "API for the Messaging Service."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "PROTOCOL",
+			"value": "http",
+			"type": "string"
+		},
+		{
+			"key": "BASE_URL_STORE",
+			"value": "localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "BASE_URL_UBER",
+			"value": "localhost:3001",
+			"type": "string"
+		},
+		{
+			"key": "BASE_URL_WHATSAPP",
+			"value": "localhost:3002",
+			"type": "string"
+		},
+		{
+			"key": "PURCHASE_ID",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "TRIP_ID",
+			"value": "1",
+			"type": "string"
+		}
+	]
+}

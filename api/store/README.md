@@ -16,7 +16,7 @@ The Store API exposes several basic endpoints to simulate the recording of purch
 <table>
   <tr>
     <th>Description</th>
-    <td>Records a new or multiple purchases in the store.</td>
+    <td>Records a new purchase in the store.</td>
   </tr>
   <tr>
     <th>HTTP Method</th>
@@ -25,10 +25,6 @@ The Store API exposes several basic endpoints to simulate the recording of purch
   <tr>
     <th>URL</th>
     <td>/purchases</td>
-  </tr>
-  <tr>
-    <th>Parameters</th>
-    <td><code>count</code>: number of purchases to register. (Optional)</td>
   </tr>
   <tr>
     <th>Body</th>
@@ -47,7 +43,7 @@ The Store API exposes several basic endpoints to simulate the recording of purch
   <tr>
     <th>Response (201 - Created)</th>
     <td>
-      <pre><code>[
+      <pre><code>
   {
     "id": 37,
     "items": ["item1", "item2", "item3"],
@@ -60,7 +56,7 @@ The Store API exposes several basic endpoints to simulate the recording of purch
     "updatedAt": "2024-09-22T14:17:56.336Z",
     "createdAt": "2024-09-22T14:17:56.336Z"
   }
-]</code></pre>
+</code></pre>
     </td>
   </tr>
 </table>
