@@ -20,7 +20,7 @@ services:
       - rabbit_net
     healthcheck:
       test: ["CMD-SHELL", "rabbitmq-diagnostics -q ping"]
-      interval: 10s
+      interval: 15s
       timeout: 5s
       retries: 5
 
@@ -146,7 +146,7 @@ services:
       - RABBITMQ_PROTOCOL=amqp
       - RABBITMQ_USER=guest
       - RABBITMQ_PASSWORD=guest
-      - transportation_API=http://transportation_api:3001
+      - TRANSPORTATION_API=http://transportation_api:3001
     ports:
       - "4001:4000"
     networks:
@@ -164,7 +164,7 @@ services:
       - RABBITMQ_PROTOCOL=amqp
       - RABBITMQ_USER=guest
       - RABBITMQ_PASSWORD=guest
-      - messaging_API=http://messaging_api:3002
+      - MESSAGING_API=http://messaging_api:3002
     ports:
       - "4002:4000"
     networks:

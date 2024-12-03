@@ -31,7 +31,7 @@ amqp.connect(config.RABBITMQ_URL, function (error0, connection) {
             const trip = content.data;
 
             // Send a message for the Trip
-            const message = await createMessage({
+            await createMessage({
               purchaseId: trip.purchaseId,
               tripId: trip.id,
               message: "You got a free trip to your home.",
@@ -39,7 +39,6 @@ amqp.connect(config.RABBITMQ_URL, function (error0, connection) {
             });
 
             // Acknowledge the retrieved message
-            console.log("Message sent:" + message.id);
             channel.ack(msg);
           } catch (error) {
             console.error("Error processing message:", error);

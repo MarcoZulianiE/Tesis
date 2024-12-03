@@ -48,9 +48,11 @@ amqp.connect(config.RABBITMQ_URL, function (error0, connection) {
                 persistent: true,
               }
             );
+            console.log(
+              "Requested User Notification for Purchase with id " + purchase.id
+            );
 
             // Acknowledge the retrieved message
-            console.log("Message sent for Trip with id: " + trip.id);
             channel.ack(msg);
           } catch (error) {
             console.error("Error processing message:", error);

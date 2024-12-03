@@ -21,7 +21,9 @@ async function checkStorePurchases(channel, lastCheckedDate) {
           persistent: true,
         }
       );
-      console.log("Message sent for Purchase with id: " + purchase.id);
+      console.log(
+        `Requested transportation for Purchase with id ${purchase.id}`
+      );
     }
   }
 }
