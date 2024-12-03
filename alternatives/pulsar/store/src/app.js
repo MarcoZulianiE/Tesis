@@ -3,7 +3,7 @@ import Pulsar from "pulsar-client";
 import { createEvent } from "./utils/event-format.js";
 import { getNewPurchases } from "./utils/api.js";
 
-const uberTopic = config.UBER_TOPIC;
+const transportationTopic = config.TRANSPORTATION_TOPIC;
 
 /**
  * Checks recent store purchases and sends an event if the purchase value meets the specified threshold.
@@ -13,7 +13,7 @@ async function checkStorePurchases(producer, lastCheckedDate) {
   if (!producer.isConnected()) {
     console.log("Reinitializing the producer...");
     producer = await client.createProducer({
-      topic: uberTopic,
+      topic: transportationTopic,
     });
   }
 
@@ -37,7 +37,7 @@ const client = new Pulsar.Client({
 });
 
 const producer = await client.createProducer({
-  topic: uberTopic,
+  topic: transportationTopic,
 });
 
 let lastCheckedDate = new Date();

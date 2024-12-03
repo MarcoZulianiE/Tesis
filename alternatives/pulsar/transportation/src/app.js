@@ -8,15 +8,15 @@ const client = new Pulsar.Client({
   operationTimeoutSeconds: 30,
 });
 
-const uberTopic = config.UBER_TOPIC;
-const whatsappTopic = config.WHATSAPP_TOPIC;
+const transportationTopic = config.TRANSPORTATION_TOPIC;
+const messagingTopic = config.MESSAGING_TOPIC;
 
 const producer = await client.createProducer({
-  topic: whatsappTopic,
+  topic: messagingTopic,
 });
 const consumer = await client.subscribe({
-  topic: uberTopic,
-  subscription: "uber-service",
+  topic: transportationTopic,
+  subscription: "transportation-service",
   subscriptionType: "Shared",
 });
 

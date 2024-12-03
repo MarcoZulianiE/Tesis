@@ -7,11 +7,11 @@ const client = new Pulsar.Client({
   operationTimeoutSeconds: 30,
 });
 
-const whatsappTopic = config.WHATSAPP_TOPIC;
+const messagingTopic = config.MESSAGING_TOPIC;
 
 const consumer = await client.subscribe({
-  topic: whatsappTopic,
-  subscription: "whatsapp-service",
+  topic: messagingTopic,
+  subscription: "messaging-service",
   subscriptionType: "Shared",
 });
 
