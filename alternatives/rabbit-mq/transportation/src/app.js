@@ -3,8 +3,8 @@ import amqp from "amqplib/callback_api.js";
 import { createEvent } from "./utils/event-format.js";
 import { createTrip } from "./utils/api.js";
 
-const uberQueue = config.UBER_QUEUE;
-const whatsappQueue = config.WHATSAPP_QUEUE;
+const transportationQueue = config.TRANSPORTATION_QUEUE;
+const messagingQueue = config.MESSAGING_QUEUE;
 
 // Connect to RabbitMQ using the URL
 amqp.connect(config.RABBITMQ_URL, function (error0, connection) {
@@ -18,12 +18,12 @@ amqp.connect(config.RABBITMQ_URL, function (error0, connection) {
     }
 
     // Validate the queues exist
-    channel.assertQueue(uberQueue, { durable: true });
-    channel.assertQueue(whatsappQueue, { durable: true });
+    channel.assertQueue(transportationQueue, { durable: true });
+    channel.assertQueue(messagingQueue, { durable: true });
 
-    // Consume messages from the uberQueue
+    // Consume messages from the transportationQueue
     channel.consume(
-      uberQueue,
+      transportationQueue,
       async (msg) => {
         if (msg !== null) {
           try {
@@ -40,9 +40,9 @@ amqp.connect(config.RABBITMQ_URL, function (error0, connection) {
               user: purchase.user,
             });
 
-            // Send the new message to the whatsapp queue
+            // Send the new message to the messagingQueue
             channel.sendToQueue(
-              whatsappQueue,
+              messagingQueue,
               Buffer.from(JSON.stringify(createEvent(trip.id, trip))),
               {
                 persistent: true,

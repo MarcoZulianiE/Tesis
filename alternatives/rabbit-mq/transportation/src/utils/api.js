@@ -2,7 +2,7 @@ import config from "../config/config.js";
 
 export async function createTrip(trip) {
   try {
-    const response = await fetch(`${config.UBER_API}/trips`, {
+    const response = await fetch(`${config.TRANSPORTATION_API}/trips`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -2,7 +2,7 @@ import config from "./config/config.js";
 import amqp from "amqplib/callback_api.js";
 import { createMessage } from "./utils/api.js";
 
-const whatsappQueue = config.WHATSAPP_QUEUE;
+const messagingQueue = config.MESSAGING_QUEUE;
 
 // Connect to RabbitMQ using the URL
 amqp.connect(config.RABBITMQ_URL, function (error0, connection) {
@@ -16,11 +16,11 @@ amqp.connect(config.RABBITMQ_URL, function (error0, connection) {
     }
 
     // Validate the queue exist
-    channel.assertQueue(whatsappQueue, { durable: true });
+    channel.assertQueue(messagingQueue, { durable: true });
 
-    // Consume messages from the whatsappQueue
+    // Consume messages from the messagingQueue
     channel.consume(
-      whatsappQueue,
+      messagingQueue,
       async (msg) => {
         if (msg !== null) {
           try {

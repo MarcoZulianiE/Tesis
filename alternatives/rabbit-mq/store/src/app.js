@@ -3,7 +3,7 @@ import amqp from "amqplib/callback_api.js";
 import { createEvent } from "./utils/event-format.js";
 import { getNewPurchases } from "./utils/api.js";
 
-const uberQueue = config.UBER_QUEUE;
+const transportationQueue = config.TRANSPORTATION_QUEUE;
 
 /**
  * Checks recent store purchases and sends an event if the purchase value meets the specified threshold.
@@ -15,7 +15,7 @@ async function checkStorePurchases(channel, lastCheckedDate) {
   for (const purchase of purchases) {
     if (purchase.total >= 150000) {
       channel.sendToQueue(
-        uberQueue,
+        transportationQueue,
         Buffer.from(JSON.stringify(createEvent(purchase.id, purchase))),
         {
           persistent: true,
@@ -38,7 +38,7 @@ amqp.connect(config.RABBITMQ_URL, function (error0, connection) {
     }
 
     // Validate the queue exists
-    channel.assertQueue(uberQueue, {
+    channel.assertQueue(transportationQueue, {
       durable: true,
     });
 
