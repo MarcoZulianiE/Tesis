@@ -1,6 +1,6 @@
-# API: Uber
+# API: Transportation
 
-This API simulates the **Uber** service used in the integration scenario proposed in the thesis. Its purpose is to represent the ride booking system.
+This API simulates the **Transportation** service used in the integration scenario proposed in the project. Its purpose is to represent the transportation booking system.
 
 ## 0. Index
 
@@ -9,7 +9,7 @@ This API simulates the **Uber** service used in the integration scenario propose
 
 ## 1. Available Endpoints
 
-The Uber API exposes several basic endpoints to simulate ride bookings for users and to query registered trips.
+The Transportation service API exposes several basic endpoints to simulate ride bookings for users and to query registered trips.
 
 ### 1.1. Register Trip
 
@@ -114,7 +114,7 @@ The Uber API exposes several basic endpoints to simulate ride bookings for users
   </tr>
   <tr>
     <th>Response (200 - OK)</th>
-    <td>API Uber works</td>
+    <td>Transportation API works</td>
   </tr>
 </table>
 
@@ -158,11 +158,11 @@ To run the API locally on your machine:
 
 1. Make sure you have **Node.js** installed.
 
-2. Clone the repository and navigate to the `api/uber` directory:
+2. Clone the repository and navigate to the `api/transportation` directory:
 
    ```bash
-   git clone https://github.com/MarcoZulianiE/Tesis.git
-   cd api/uber
+   git clone https://github.com/MarcoZulianiE/Thesis.git
+   cd api/transportation
    ```
 
 3. Install the dependencies:
@@ -185,23 +185,23 @@ If you prefer to run the API in a Docker container, follow these steps:
 
 1. Make sure you have **Docker** installed.
 
-2. Clone the repository and navigate to the `api/uber` directory:
+2. Clone the repository and navigate to the `api/transportation` directory:
 
    ```bash
-   git clone https://github.com/MarcoZulianiE/Tesis.git
-   cd api/uber
+   git clone https://github.com/MarcoZulianiE/Thesis.git
+   cd api/transportation
    ```
 
 3. Build the Docker image:
 
    ```bash
-   docker build -t uber-api .
+   docker build -t transportation-api .
    ```
 
 4. Run the container:
 
    ```bash
-   docker run -p 3000:3000 uber-api
+   docker run -p 3000:3000 transportation-api
    ```
 
 5. The API will be available at `http://localhost:3000`.

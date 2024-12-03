@@ -1,6 +1,6 @@
-# API: WhatsApp
+# API: Messaging
 
-This API simulates the **WhatsApp** service used in the integration scenario proposed in the thesis. Its function is to represent a messaging system that allows sending messages.
+This API simulates the **Messaging** service used in the integration scenario proposed in the project. Its function is to represent a messaging system that allows sending messages.
 
 ## 0. Table of Contents
 
@@ -9,7 +9,7 @@ This API simulates the **WhatsApp** service used in the integration scenario pro
 
 ## 1. Available Endpoints
 
-The WhatsApp API exposes several basic endpoints to simulate sending messages to users.
+The Messaging service API exposes several basic endpoints to simulate sending messages to users.
 
 ### 1.1. Send a Message
 
@@ -122,7 +122,7 @@ The WhatsApp API exposes several basic endpoints to simulate sending messages to
   <tr>
     <th>Response (200 - OK)</th>
     <td>
-      API WhatsApp works
+      Messaging API works
     </td>
   </tr>
 </table>
@@ -169,11 +169,11 @@ To run the API locally on your machine:
 
 1. Ensure **Node.js** is installed.
 
-2. Clone the repository and navigate to the `api/whatsapp` directory:
+2. Clone the repository and navigate to the `api/messaging` directory:
 
    ```bash
    git clone https://github.com/MarcoZulianiE/Tesis.git
-   cd api/whatsapp
+   cd api/messaging
    ```
 
 3. Install the dependencies:
@@ -196,23 +196,23 @@ If you prefer to run the API in a Docker container, follow these steps:
 
 1. Ensure **Docker** is installed.
 
-2. Clone the repository and navigate to the `api/whatsapp` directory:
+2. Clone the repository and navigate to the `api/messaging` directory:
 
    ```bash
    git clone https://github.com/MarcoZulianiE/Tesis.git
-   cd api/whatsapp
+   cd api/messaging
    ```
 
 3. Build the Docker image:
 
    ```bash
-   docker build -t whatsapp-api .
+   docker build -t messaging-api .
    ```
 
 4. Run the container:
 
    ```bash
-   docker run -p 3000:3000 whatsapp-api
+   docker run -p 3000:3000 messaging-api
    ```
 
 5. The API will be available at `http://localhost:3000`.
