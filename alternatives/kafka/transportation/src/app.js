@@ -38,6 +38,8 @@ await consumer.run({
       topic: messagingTopic,
       messages: [{ value: JSON.stringify(createEvent(trip.id, trip)) }],
     });
-    console.log("Message sent for Purchase with id: " + purchase.id);
+    console.log(
+      "Requested User Notification for Purchase with id " + purchase.id
+    );
   },
 });

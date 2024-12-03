@@ -30,7 +30,5 @@ await consumer.run({
       message: "You got a free trip to your home.",
       user: trip.user,
     });
-
-    console.log("Message sent:" + whaMessage.id);
   },
 });

@@ -22,6 +22,7 @@ export async function createMessage(message) {
     console.log(
       `Message created with id ${maessageData.id} for purchase id ${maessageData.purchaseId}`
     );
+    return maessageData;
   } catch (error) {
     console.error(
       `Error creating message with messaging API for purchase id ${message.purchaseId}`,

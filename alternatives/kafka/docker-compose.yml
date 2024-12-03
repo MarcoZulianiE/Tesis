@@ -187,7 +187,7 @@ services:
     environment:
       - KAFKA_HOST=kafka
       - KAFKA_PORT=19092
-      - TRANSPORTATION_API=http://messaging_api:3002
+      - MESSAGING_API=http://messaging_api:3002
     ports:
       - "4002:4000"
     networks:

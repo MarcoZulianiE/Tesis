@@ -25,7 +25,9 @@ async function checkStorePurchases(producer, lastCheckedDate) {
           { value: JSON.stringify(createEvent(purchase.id, purchase)) },
         ],
       });
-      console.log("Message sent for Purchase with id: " + purchase.id);
+      console.log(
+        `Requested transportation for Purchase with id ${purchase.id}`
+      );
     }
   }
 }
