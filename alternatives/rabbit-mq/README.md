@@ -16,11 +16,11 @@ This directory contains the implementation of the scenario using **RabbitMQ**. T
 
 The following diagram represents the flow of the composite process executed to fulfill the requirements of the established scenario.
 
-![Component diagram of the scenario using RabbitMQ](../../assets/rabbitmq-diagram.png)
+![Component diagram of the scenario using RabbitMQ](../../docs/assets/rabbitmq-diagram.png)
 
 ## 3. Execution
 
-**Docker Compose** is used for execution. Docker Compose allows you to quickly and easily start all the services in the scenario. This includes the execution of all APIs, the intermediary services for **Store**, **Uber**, and **WhatsApp**, as well as the RabbitMQ broker.
+**Docker Compose** is used for execution. Docker Compose allows you to quickly and easily start all the services in the scenario. This includes the execution of all APIs, the intermediary services for **Store**, **Transportation**, and **Messaging**, as well as the RabbitMQ broker.
 
 1. Ensure that **Docker** is installed.
 

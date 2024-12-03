@@ -33,8 +33,8 @@ Within each alternative, you will find the implementation of the three intermedi
 
 ## 4. Execution
 
-For each of the selected tools, a specific implementation of the three services—**Store**, **WhatsApp**, and **Uber**—has been carried out.
+For each of the selected tools, a specific implementation of the three services—**Store**, **Transportation**, and **Messaging**—has been carried out.
 
-All implementations share the same **Store**, **WhatsApp**, and **Uber** APIs. The main difference between the implementations is the tool used as the **messaging broker** and the configuration of the intermediary services to adapt to each of them.
+All implementations share the same **Store**, **Transportation**, and **Messaging** APIs. The main difference between the implementations is the tool used as the **messaging broker** and the configuration of the intermediary services to adapt to each of them.
 
 In general terms, the logic remains the same across all cases, as the services produce or consume messages that are tailored to the tool used. The applied logic is consistent across the same services in the different implementations, ensuring a coherent structure in handling data and service interactions.

@@ -1,17 +1,17 @@
-# Thesis Repository: Towards a Choreography-Based Approach for Service Integration in Smart Cities
+# Towards a Choreography-Based Approach for Service Integration in Smart Cities
 
 ## 0. Table of Contents
 
-1. [About the Thesis](#1-about-the-thesis)
+1. [About the Project](#1-about-the-project)
 2. [Evaluated Scenario](#2-evaluated-scenario)
 3. [Previous Approach](#3-previous-approach-orchestration)
 4. [Developed Approach](#4-developed-approach-choreography)
 5. [About the Repository](#5-about-the-repository)
 6. [Repository Structure](#6-repository-structure)
 
-## 1. About the Thesis
+## 1. About the Project
 
-The thesis titled _"Towards a Choreography-Based Approach for Service Integration in the Context of Smart Cities"_ aims to analyze the use of choreography as a method for service integration in smart city environments. Initially, the integration of these services was approached through an orchestration framework, hence the work focuses on evaluating the benefits and challenges of a choreography-based solution.
+The project titled _"Towards a Choreography-Based Approach for Service Integration in the Context of Smart Cities"_ aims to analyze the use of choreography as an alternative for service integration in smart city environments. Initially, the integration of these services was approached through an orchestration framework, hence the work focuses on evaluating the benefits and challenges of a choreography-based solution.
 
 The research included an analysis of available tools and projects, both active and historical, for implementing choreographies in service integration. From this analysis, the most suitable tools were selected based on their functionality, support, active community, and market adoption.
 
@@ -26,34 +26,34 @@ This work is motivated by the need to integrate multiple services in a smart cit
 - **Scalability:** Allow infrastructure growth to manage peak demand.
 - **Resilience:** Ensure rapid recovery of services in case of failures.
 
-## 2. Evaluated Scenario
+## 2. Case Study Scenario
 
-The evaluated scenario considers the integration of three services: a store that records sales, a transportation service, and a messaging service. These services, offered by independent entities, expose their functionalities through APIs. The services are: **Store**, **Uber**, and **WhatsApp**.
+The evaluated scenario considers the integration of three services: a store service, a transportation service, and a messaging service. These services, offered by independent entities, expose their functionalities through APIs. The services are: **Store**, **Transportation**, and **Messaging**.
 
-The goal of the scenario is to provide a free Uber ride to customers who make a purchase greater than 150,000 pesos. The process includes the following steps:
+The goal of the scenario is to provide a free transport ride to customers who make a purchase greater than 150,000 pesos. The process includes the following steps:
 
 1. The customer makes a purchase at the store.
-2. If the purchase amount exceeds 150,000 pesos, a ride is reserved in Uber.
-3. The ride information is sent to the customer via WhatsApp.
+2. If the purchase amount exceeds 150,000 pesos, a ride is reserved using the transportation service.
+3. The ride information is sent to the customer via the messaging service.
 
 Since this process involves sensitive customer data, **data security** is a critical aspect, and solutions must be designed to ensure the protection of information at all stages.
 
-## 3. Previous Approach (Orchestration)
+## 3. Current Approach (Orchestration)
 
 The scenario initially considers a solution based on orchestration, where a central orchestrator managed the entire process flow. This orchestrator followed the steps below:
 
-![Component Diagram of the Scenario Using an Orchestrator](./assets/orchestration-diagram.png)
+![Component Diagram of the Scenario Using an Orchestrator](./docs/assets/orchestration-diagram.png)
 
 1. **Polling:** The orchestrator periodically queries the store service to detect new sales.
 2. **Validation:** If a sale is detected, it checks if the amount exceeds 150,000 pesos.
-3. **Uber Reservation:** If the sale meets the criterion, a reservation is requested in Uber.
-4. **WhatsApp Message:** Once the ride is reserved, the information is sent to the customer through WhatsApp.
+3. **Transport Reservation:** If the sale meets the criterion, a reservation is requested to the transportation server.
+4. **Message Sending:** Once the ride is reserved, the information is sent to the customer using the messaging service.
 
 ## 4. Developed Approach (Choreography)
 
 As an alternative, a choreography-based solution was designed, where each service operates autonomously and communicates through events and messages. This approach eliminates the need for a central controller, distributing logic among the services.
 
-After an exhaustive analysis of tools, the three best solutions for this scenario were selected: **RabbitMQ**, **Kafka**, and **Pulsar**, all of which are highly adopted in the market and capable of implementing messaging brokers that facilitate communication through events.
+After an exhaustive analysis of tools, the three best solutions for this scenario were selected: **RabbitMQ**, **Kafka**, and **Pulsar**, all of which are capable of implementing messaging brokers that facilitate communication through events.
 
 ## 5. About the Repository
 
@@ -67,9 +67,11 @@ This repository contains:
 ## 6. Repository Structure
 
 ```
-├── alternatives   // Folder with proof of concept tests for each selected tool
-├── api            // APIs that simulate the services of Store, Uber, and WhatsApp
-└── assets         // Diagrams and visual content used in the READMEs
+├── alternatives   // Folder with each tool implementations
+├── api            // APIs that simulate the services of Store, Transportation, and Messaging
+└── docs           // Folder with documents content
+    └── assets     // Folder with diagrams and visual content
+└── .gitignore     // Github ignore file
 └── README.md      // You are here
 ```
 

@@ -16,11 +16,11 @@ This directory contains the implementation of the scenario using **Apache Pulsar
 
 The following diagram represents the flow of the composite process executed to fulfill the requirements of the established scenario.
 
-![Component diagram of the scenario using Pulsar](../../assets/pulsar-diagram.png)
+![Component diagram of the scenario using Pulsar](../../docs/assets/pulsar-diagram.png)
 
 ## 3. Execution
 
-**Docker Compose** is used for execution. Docker Compose allows you to quickly and easily start up all the services in the scenario. This includes the execution of all APIs, the intermediary services for **Store**, **Uber**, and **WhatsApp**, as well as the Pulsar broker.
+**Docker Compose** is used for execution. Docker Compose allows you to quickly and easily start up all the services in the scenario. This includes the execution of all APIs, the intermediary services for **Store**, **Transportation**, and **Messaging**, as well as the Pulsar broker.
 
 1. Ensure that **Docker** is installed.
 

@@ -1,6 +1,6 @@
-# API: Store
+# API: Store Service
 
-This API simulates the **Store** service used in the integration scenario proposed in the thesis. Its main function is to record sales and provide the ability to query recorded sales.
+This API simulates the **Store** service used in the integration scenario proposed in the project. Its main function is to record sales and provide the ability to query recorded sales.
 
 ## 0. Index
 
@@ -169,7 +169,7 @@ Follow these steps to run the API locally:
 2. Clone the repository and navigate to the `api/store` directory:
 
    ```bash
-   git clone https://github.com/MarcoZulianiE/Tesis.git
+   git clone https://github.com/MarcoZulianiE/Thesis.git
    cd api/store
    ```
 
@@ -196,7 +196,7 @@ If you prefer to run the API inside a Docker container, follow these steps:
 2. Clone the repository and navigate to the `api/store` directory:
 
    ```bash
-   git clone https://github.com/MarcoZulianiE/Tesis.git
+   git clone https://github.com/MarcoZulianiE/Thesis.git
    cd api/store
    ```
 
