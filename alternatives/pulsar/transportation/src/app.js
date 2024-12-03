@@ -39,7 +39,9 @@ while (true) {
   await producer.send({
     data: Buffer.from(JSON.stringify(createEvent(trip.id, trip))),
   });
-  console.log("Message sent for Purchase with id: " + purchase.id);
+  console.log(
+    "Requested User Notification for Purchase with id " + purchase.id
+  );
 
   // Acknowledge the message to Pulsar
   consumer.acknowledge(msg);

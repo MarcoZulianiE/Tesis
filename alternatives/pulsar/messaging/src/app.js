@@ -32,8 +32,6 @@ while (true) {
     user: trip.user,
   });
 
-  console.log("Message sent:" + whaMessage.id);
-
   // Acknowledge the message to Pulsar
   consumer.acknowledge(msg);
 }

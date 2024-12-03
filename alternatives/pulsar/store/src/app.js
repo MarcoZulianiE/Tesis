@@ -24,13 +24,14 @@ async function checkStorePurchases(producer, lastCheckedDate) {
       await producer.send({
         data: Buffer.from(JSON.stringify(createEvent(purchase.id, purchase))),
       });
-      console.log("Message sent for Purchase with id: " + purchase.id);
+      console.log(
+        `Requested transportation for Purchase with id ${purchase.id}`
+      );
     }
   }
 }
 
 // Connect to pulsar using the url
-
 const client = new Pulsar.Client({
   serviceUrl: config.PULSAR_URL,
   operationTimeoutSeconds: 30,
